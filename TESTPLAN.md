@@ -40,5 +40,4 @@ just visible.
 ## What I learned writing this plan
 Writing a test plan forces you to think like a user, not a
 developer. Every time I wrote "why I chose this test" I caught
-something I had not thought about before. That is the whole
-point of quality engineering.
+something I had not thought about before. 

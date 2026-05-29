@@ -1,29 +1,39 @@
+# AccessibilityShowcase
+
+A SwiftUI iOS app with a full XCUITest suite,  built to demonstrate production-grade accessible iOS development and software engineering practices.
 
 
-## What's Tested
+## The Problem
 
-- VoiceOver labels — validates accessibilityLabel and accessibilityHint on interactive elements
-- Error announcements — confirms VoiceOver announces errors immediately via UIAccessibility.post
-- Field interaction — verifies fields accept typed input correctly
-- Accessibility identifiers — validates testable IDs are set on all key UI elements
-- Validation logic — unit tests covering email, password, and error state logic
+Accessibility is often treated as an afterthought in iOS development. Most apps ship without proper VoiceOver support, dynamic type scaling, or sufficient color contrast, leaving millions of users behind. At the same time, many portfolios lack real iOS test automation, relying instead on manual testing checklists.
 
-
-
-## Running the Tests
-
-```bash
-git clone https://github.com/SavernaA/AccessibilityShowcase.git
-cd AccessibilityShowcase
-open AccessibilityShowcase.xcodeproj
-```
-
-Press Cmd+U in Xcode to run the full test suite.
+This project solves both.
 
 
 
-## About
+## The Solution
 
-This project is part of a portfolio built to demonstrate production-level iOS development and software engineering skills — real code, real tests, real accessibility knowledge.
+AccessibilityShowcase is a fully functional SwiftUI app that:
+- Demonstrates iOS accessibility best practices across real UI components
+- Pairs every accessible UI pattern with an XCUITest that validates it automatically
+- Serves as a living reference for accessible iOS development and test automation
 
-[GitHub Profile](https://github.com/SavernaA)
+
+## Tech Stack
+
+- Language: Swift 5.9+
+- UI Framework: SwiftUI
+- Test Framework: XCUITest
+- Accessibility APIs: UIAccessibility, AXElement
+- Target Platform: iOS 16+
+- IDE: Xcode 15+
+
+
+## Project Structure
+
+The project follows standard Xcode conventions:
+
+- AccessibilityShowcase/ — main app source including ContentView.swift
+- AccessibilityShowcaseUITests/ — XCUITest UI test suite
+- AccessibilityShowcaseTests/ — unit tests for validation logic
+- README.md

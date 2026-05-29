@@ -45,6 +45,14 @@ struct ContentView: View {
             Button(action: {
                 if email.isEmpty || password.isEmpty {
                     showError = true
+
+                    // Post an accessibility notification so VoiceOver
+                    // immediately announces the error — without this,
+                    // a blind user taps Log In and hears nothing
+                    UIAccessibility.post(
+                        notification: .announcement,
+                        argument: "Error: Please enter your email and password"
+                    )
                 }
             }) {
                 Text("Log In")
@@ -59,7 +67,9 @@ struct ContentView: View {
 
             // Error Message
             // Starting with "Error:" means VoiceOver users
-            // immediately know something went wrong
+            // immediately know something went wrong.
+            // The announcement above fires instantly on tap —
+            // this label is the visible fallback for sighted users
             if showError {
                 Text("Error: Please enter your email and password")
                     .foregroundColor(.red)
@@ -73,3 +83,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+

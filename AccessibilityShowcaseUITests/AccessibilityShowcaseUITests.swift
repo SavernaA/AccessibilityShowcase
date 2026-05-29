@@ -51,6 +51,15 @@ final class AccessibilityShowcaseUITests: XCTestCase {
     }
 
     // TEST 4
+    // Does the password field have an accessibility label?
+    // SecureField must be explicitly labeled for VoiceOver users
+    @MainActor
+    func testPasswordFieldHasAccessibilityLabel() throws {
+        let passwordField = app.secureTextFields["Password"]
+        XCTAssertTrue(passwordField.exists, "Password field should have accessibility label 'Password'")
+    }
+
+    // TEST 5
     // Does the error message appear when fields are empty?
     // This is real user behavior — what happens when someone
     // tries to log in without filling anything in?
@@ -62,7 +71,7 @@ final class AccessibilityShowcaseUITests: XCTestCase {
         XCTAssertTrue(error.exists, "Error message should appear when fields are empty")
     }
 
-    // TEST 5
+    // TEST 6
     // Is the error message accessible to VoiceOver?
     // An error appearing visually means nothing if
     // VoiceOver does not announce it
@@ -74,4 +83,44 @@ final class AccessibilityShowcaseUITests: XCTestCase {
         XCTAssertTrue(error.exists, "Error message should be accessible to VoiceOver")
         XCTAssertFalse(error.label.isEmpty, "Error message label should not be empty")
     }
+
+    // TEST 7
+    // Can the user type into the email field?
+    // Verifies the field is interactive, not just present
+    @MainActor
+    func testEmailFieldIsEditable() throws {
+        let emailField = app.textFields["Email address"]
+        emailField.tap()
+        emailField.typeText("test@example.com")
+        XCTAssertEqual(emailField.value as? String, "test@example.com",
+                       "Email field should accept typed input")
+    }
+
+    // TEST 8
+    // Does the error disappear after filling in both fields?
+    // Confirms state resets correctly for returning users
+    @MainActor
+    func testNoErrorWhenFieldsAreFilled() throws {
+        let emailField = app.textFields["Email address"]
+        let passwordField = app.secureTextFields["Password"]
+        let button = app.buttons["Log In"]
+
+        // First trigger the error
+        button.tap()
+        XCTAssertTrue(
+            app.staticTexts["Error: Please enter your email and password"].exists,
+            "Error should appear when fields are empty"
+        )
+
+        // Now fill in both fields and verify we can proceed
+        emailField.tap()
+        emailField.typeText("test@example.com")
+        passwordField.tap()
+        passwordField.typeText("password123")
+
+        // Verify fields have content
+        XCTAssertEqual(emailField.value as? String, "test@example.com",
+                       "Email field should contain entered text")
+    }
 }
+

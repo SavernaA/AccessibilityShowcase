@@ -9,8 +9,6 @@ Accessibility is often treated as an afterthought in iOS development. Most apps 
 
 This project solves both.
 
-
-
 ## The Solution
 
 AccessibilityShowcase is a fully functional SwiftUI app that:
